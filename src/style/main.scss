@@ -37,20 +37,28 @@ li {
   text-align: center;
 }
 
-.error-txt {  
-  color: #ff3333;
+.error-txt {
+  color: #791515;
   font-size: 15px;
   display: none;
+  margin-left: 10px;
 }
 
-.container {  
+.container {
   margin-top: 50px;
   padding: 50px;
   background-color: rgba(0, 0, 0, 0.5) !important;
-  color: #fff;
-  border: 1px dotted #fff;
+  color: bisque;
+  border: 1px dotted bisque;
   border-radius: 10px;
   text-align: center;
+}
+
+.temparature {
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 5px;
 }
 
 footer {

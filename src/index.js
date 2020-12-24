@@ -6,52 +6,65 @@ const searchIcon = document.getElementById('searchicon');
 const errorTxt = document.getElementById('errortxt');
 const input = document.getElementById('location');
 
-function processData(weatherData) {    
-    const myData = { 
-      location: weatherData.name,
-      country: weatherData.sys.country.toUpperCase(),
-      condition: weatherData.weather[0].description,
-      Temparature: {
-        f: Math.round((Math.ceil(weatherData.main.temp) - 273) * (9/5) + 32),
-        c: (Math.ceil(weatherData.main.temp) - 273),
-      },
-      feelsLike: {
-        f: Math.round((Math.ceil(weatherData.main.feels_like) - 273) * (9/5) + 32),
-        c: (Math.ceil(weatherData.main.feels_like) - 273),
-      },
-      humidity: weatherData.main.humidity,
-      wind: Math.round(weatherData.wind.speed),
-    };    
-   
-    return myData;
-  }
+const containerEl = document.querySelector('.container');
+const weatherConditionEl = document.querySelector('.weathercondition');
+const locationEl = document.querySelector('.location');
+const temparatureEl = document.querySelector('.temparature');
+const temparatureFeelsLikeEl = document.querySelector('.feels-like');
+const humidityEl = document.querySelector('.humidity');
+const windSpeedEl = document.querySelector('.windspeed');
 
-function displayData(newData) { 
-  document.querySelector('.condition').textContent = newData.condition;
-  document.querySelector('.location').textContent = `${newData.location}, ${newData.country}`;
-  document.querySelector('.degrees').textContent = `${newData.Temparature.f} ° F`;
-  document.querySelector('.feels-like').textContent = `Feels-Like: ${newData.feelsLike.f} ° F`;
-  document.querySelector('.humidity').textContent = `Humidity: ${newData.humidity} % `;
-  document.querySelector('.wind-mph').textContent = `Wind-Speed: ${newData.wind} MPH`;
-}
+const processData = (weatherInfo) => {
+  const myData = {
+    location: weatherInfo.name,
+    country: weatherInfo.sys.country.toUpperCase(),
+    condition: weatherInfo.weather[0].description,
+    Temparature: {
+      f: Math.round((Math.ceil(weatherInfo.main.temp) - 273) * (9 / 5) + 32),
+      c: (Math.ceil(weatherInfo.main.temp) - 273),
+    },
+    feelsLike: {
+      f: Math.round((Math.ceil(weatherInfo.main.feels_like) - 273) * (9 / 5) + 32),
+      c: (Math.ceil(weatherInfo.main.feels_like) - 273),
+    },
+    humidity: weatherInfo.main.humidity,
+    wind: Math.round(weatherInfo.wind.speed),
+  };
+
+  return myData;
+};
+
+const displayData = (newData) => {
+  containerEl.classList.add('w3-animate-zoom');
+  weatherConditionEl.textContent = newData.condition;
+  locationEl.textContent = `${newData.location}, ${newData.country}`;
+  temparatureEl.textContent = `${newData.Temparature.f} ° F / ${newData.Temparature.c} ° C`;
+  temparatureFeelsLikeEl.textContent = `Feels-Like: ${newData.feelsLike.f} ° F`;
+  humidityEl.textContent = `Humidity: ${newData.humidity} % `;
+  windSpeedEl.textContent = `Wind-Speed: ${newData.wind} MPH`;
+};
 
 const throwErrorMsg = () => {
-    errorTxt.style.display = 'block';
+  errorTxt.style.display = 'block';
+};
+
+const reset = () => {
+  searchBox.reset();
 };
 
 const getWeatherData = async (location) => {
   const response = await fetch(
     `http://api.openweathermap.org/data/2.5/weather?APPID=85543fa448f54a66d6f9b8c88d388027&q=${location}`,
     {
-    mode: 'cors',
-    }
+      mode: 'cors',
+    },
   );
   if (response.status === 400) {
     throwErrorMsg();
   } else {
     errorTxt.style.display = 'none';
     const weatherData = await response.json();
-    console.log("WeatherData");
+    console.log('WeatherData');
     console.log(weatherData);
     const newData = processData(weatherData);
     displayData(newData);
@@ -59,23 +72,18 @@ const getWeatherData = async (location) => {
   }
 };
 
-const fetchWeather =() => {  
+const fetchWeather = () => {
   const userLocation = input.value;
   getWeatherData(userLocation);
 };
 
 const submitHandler = (e) => {
-    console.log("I am inside the form.")
-    e.preventDefault();
-    fetchWeather();
-    
+  console.log('I am inside the form.');
+  e.preventDefault();
+  containerEl.classList.remove('w3-animate-zoom');
+  fetchWeather();
 };
 
 searchBox.addEventListener('submit', submitHandler);
 searchIcon.addEventListener('click', submitHandler);
-
-const reset = () => {
-  searchBox.reset();
-};
-
 getWeatherData('London');
