@@ -6,35 +6,40 @@ const searchIcon = document.getElementById('searchicon');
 const errorTxt = document.getElementById('errortxt');
 const input = document.getElementById('location');
 
-
-
-function processData(weatherData) {
-    // grab all the data i want to display on the page
+function processData(weatherData) {    
     const myData = { 
-      location: weatherData.name.toUpperCase(),
-    };
-  
-    myData['region'] = weatherData.country;
+      location: weatherData.name,
+      country: weatherData.sys.country.toUpperCase(),
+      condition: weatherData.weather[0].description,
+      Temparature: {
+        f: Math.round((Math.ceil(weatherData.main.temp) - 273) * (9/5) + 32),
+        c: (Math.ceil(weatherData.main.temp) - 273),
+      },
+      feelsLike: {
+        f: Math.round((Math.ceil(weatherData.main.feels_like) - 273) * (9/5) + 32),
+        c: (Math.ceil(weatherData.main.feels_like) - 273),
+      },
+      humidity: weatherData.main.humidity,
+      wind: Math.round(weatherData.wind.speed),
+    };    
+   
     return myData;
   }
 
-  function displayData(newData) { 
-    document.querySelector('.condition').textContent = newData.condition;
-    document.querySelector(
-      '.location'
-    ).textContent = `${newData.location}, ${newData.region}`;
-    document.querySelector('.degrees').textContent = newData.currentTemp.f;
-    document.querySelector(
-      '.feels-like'
-    ).textContent = `FEELS LIKE: ${newData.feelsLike.f}`;
-    document.querySelector('.wind-mph').textContent = `WIND: ${newData.wind} MPH`;
-    document.querySelector(
-      '.humidity'
-    ).textContent = `HUMIDITY: ${newData.humidity}`;
+function displayData(newData) { 
+  document.querySelector('.condition').textContent = newData.condition;
+  document.querySelector('.location').textContent = `${newData.location}, ${newData.country}`;
+  document.querySelector('.degrees').textContent = `${newData.Temparature.f} ° F`;
+  document.querySelector('.feels-like').textContent = `Feels-Like: ${newData.feelsLike.f} ° F`;
+  document.querySelector('.humidity').textContent = `Humidity: ${newData.humidity} % `;
+  document.querySelector('.wind-mph').textContent = `Wind-Speed: ${newData.wind} MPH`;
 }
-  
 
-async function getWeatherData(location) {
+const throwErrorMsg = () => {
+    errorTxt.style.display = 'block';
+};
+
+const getWeatherData = async (location) => {
   const response = await fetch(
     `http://api.openweathermap.org/data/2.5/weather?APPID=85543fa448f54a66d6f9b8c88d388027&q=${location}`,
     {
@@ -42,9 +47,9 @@ async function getWeatherData(location) {
     }
   );
   if (response.status === 400) {
-    // throwErrorMsg();
+    throwErrorMsg();
   } else {
-    // error.style.display = 'none';
+    errorTxt.style.display = 'none';
     const weatherData = await response.json();
     console.log("WeatherData");
     console.log(weatherData);
@@ -52,14 +57,12 @@ async function getWeatherData(location) {
     displayData(newData);
     reset();
   }
-}
-
-
+};
 
 const fetchWeather =() => {  
   const userLocation = input.value;
   getWeatherData(userLocation);
-}
+};
 
 const submitHandler = (e) => {
     console.log("I am inside the form.")
@@ -71,6 +74,8 @@ const submitHandler = (e) => {
 searchBox.addEventListener('submit', submitHandler);
 searchIcon.addEventListener('click', submitHandler);
 
-function reset() {
-    searchBox.reset();
-}
+const reset = () => {
+  searchBox.reset();
+};
+
+getWeatherData('London');
