@@ -14,7 +14,6 @@ html {
 body {
   position: relative;
   margin: 0;
-  padding-bottom: 6rem;
   min-height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;
   background: url('../img/milky-way.jpg');
@@ -47,23 +46,14 @@ li {
   display: none;
 }
 
-.container {
-  margin-top: 20px;
+.container {  
+  margin-top: 50px;
   padding: 50px;
   background-color: rgba(0, 0, 0, 0.5) !important;
   color: #fff;
   border: 1px dotted #fff;
   border-radius: 10px;
   text-align: center;
-}
-
-.left-info {
-  text-align: center;
-  width: 50%;
-  border-right: 3px solid white;
-}
-.right-info {
-  width: 50%;
 }
 
 footer {
