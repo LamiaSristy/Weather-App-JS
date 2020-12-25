@@ -13,12 +13,16 @@ const temparatureEl = document.querySelector('.temparature');
 const temparatureFeelsLikeEl = document.querySelector('.feels-like');
 const humidityEl = document.querySelector('.humidity');
 const windSpeedEl = document.querySelector('.windspeed');
+const weatherIcon = document.querySelector('.weathericon');
+const bodyEl = document.querySelector('body');
 
 const processData = (weatherInfo) => {
   const myData = {
     location: weatherInfo.name,
     country: weatherInfo.sys.country.toUpperCase(),
-    condition: weatherInfo.weather[0].description,
+    weatherMain: weatherInfo.weather[0].main,
+    weatherDescription: weatherInfo.weather[0].description,
+    weatherIcon: weatherInfo.weather[0].icon,
     Temparature: {
       f: Math.round((Math.ceil(weatherInfo.main.temp) - 273) * (9 / 5) + 32),
       c: (Math.ceil(weatherInfo.main.temp) - 273),
@@ -36,7 +40,13 @@ const processData = (weatherInfo) => {
 
 const displayData = (newData) => {
   containerEl.classList.add('w3-animate-zoom');
-  weatherConditionEl.textContent = newData.condition;
+  if(newData.weatherMain == "Rain")  bodyEl.classList.add('background-rain');
+  else if(newData.weatherMain == "Thunderstorm")  bodyEl.classList.add('background-thunder');
+  else if(newData.weatherMain == "Clouds")  bodyEl.classList.add('background-cloud');
+  else if(newData.weatherMain == "Snow")  bodyEl.classList.add('background-snow');
+  else bodyEl.classList.add('background1');
+  weatherIcon.src = `http://openweathermap.org/img/wn/${newData.weatherIcon}.png`;
+  weatherConditionEl.textContent =`${newData.weatherMain}: ${ newData.weatherDescription}`;
   locationEl.textContent = `${newData.location}, ${newData.country}`;
   temparatureEl.textContent = `${newData.Temparature.f} ° F / ${newData.Temparature.c} ° C`;
   temparatureFeelsLikeEl.textContent = `Feels-Like: ${newData.feelsLike.f} ° F`;
@@ -81,6 +91,7 @@ const submitHandler = (e) => {
   console.log('I am inside the form.');
   e.preventDefault();
   containerEl.classList.remove('w3-animate-zoom');
+  bodyEl.className = '';
   fetchWeather();
 };
 

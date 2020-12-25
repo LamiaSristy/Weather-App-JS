@@ -15,11 +15,10 @@ body {
   position: relative;
   margin: 0;
   min-height: 100%;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  background: url('../img/milky-way.jpg');
-  background-size: 100% 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;   
   height: 100%;
 }
+
 
 h2,
 h3 {
@@ -30,6 +29,31 @@ h3 {
 
 li {
   list-style: none;
+}
+
+.background1 {
+  background: url('../img/milky-way.jpg');
+  background-size: 100% 100%;
+}
+
+.background-rain {
+  background: url('../img/Rain.jpg');
+  background-size: 100% 100%;
+}
+
+.background-thunder {
+  background: url('../img/Thunder.jpg');
+  background-size: 100% 100%;
+}
+
+.background-cloud {
+  background: url('../img/clouds.jpg');
+  background-size: 100% 100%;
+}
+
+.background-snow {
+  background: url('../img/snow.jpg');
+  background-size: 100% 100%;
 }
 
 .navbar-light {
@@ -47,9 +71,9 @@ li {
 .container {
   margin-top: 50px;
   padding: 50px;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  color: bisque;
-  border: 1px dotted bisque;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  color: rgb(27, 22, 66);
+  border: 1px dotted rgb(27, 22, 66);
   border-radius: 10px;
   text-align: center;
 }
