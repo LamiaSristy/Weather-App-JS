@@ -47,7 +47,7 @@ const displayData = (newData) => {
   else if (newData.weatherMain === 'Clouds') bodyEl.classList.add('background-cloud');
   else if (newData.weatherMain === 'Snow') bodyEl.classList.add('background-snow');
   else bodyEl.classList.add('background1');
-  weatherIcon.src = `http://openweathermap.org/img/wn/${newData.weatherIcon}.png`;  
+  weatherIcon.src = `http://openweathermap.org/img/wn/${newData.weatherIcon}.png`;
   weatherConditionEl.textContent = `${newData.weatherMain}: ${newData.weatherDescription}`;
   locationEl.textContent = `${newData.location}, ${newData.country}`;
 
@@ -60,7 +60,7 @@ const displayData = (newData) => {
     temparature2El.classList.toggle('none');
     temparature2El.classList.toggle('show');
   };
-  temparature2El.onclick = function changeContent() {  
+  temparature2El.onclick = function changeContent() {
     temparatureEl.classList.toggle('none');
     temparatureEl.classList.toggle('show');
     temparature2El.classList.toggle('none');
@@ -81,7 +81,7 @@ const reset = () => {
 };
 
 const getWeatherData = async (location) => {
-  const response = await fetch(    
+  const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?APPID=85543fa448f54a66d6f9b8c88d388027&q=${location}`,
     {
       mode: 'cors',
