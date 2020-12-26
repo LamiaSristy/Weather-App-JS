@@ -9,8 +9,8 @@ const input = document.getElementById('location');
 const containerEl = document.querySelector('.container');
 const weatherConditionEl = document.querySelector('.weathercondition');
 const locationEl = document.querySelector('.location');
-const temparatureEl = document.querySelector('.temparature');
-const temparature2El = document.querySelector('.temparature2');
+const temparatureEl = document.querySelector('#celcius');
+const temparature2El = document.querySelector('#fahrenheit');
 
 const temparatureFeelsLikeEl = document.querySelector('.feels-like');
 const humidityEl = document.querySelector('.humidity');
@@ -51,20 +51,23 @@ const displayData = (newData) => {
   weatherConditionEl.textContent = `${newData.weatherMain}: ${newData.weatherDescription}`;
   locationEl.textContent = `${newData.location}, ${newData.country}`;
 
-  temparatureEl.textContent = `${newData.Temparature.f} °F `;
-  temparature2El.textContent = `${newData.Temparature.c} ° C`;
+  temparatureEl.textContent = `${newData.Temparature.c} °C `;
+  temparature2El.textContent = `${newData.Temparature.f} °F`;
 
   temparatureEl.onclick = function changeContent() {
     temparatureEl.classList.toggle('none');
+    temparatureEl.classList.toggle('show');
+    temparature2El.classList.toggle('none');
     temparature2El.classList.toggle('show');
   };
-  temparature2El.onclick = function changeContent() {
-    temparature2El.className = '';
-    temparature2El.classList.toggle('temparature2');
-    temparatureEl.className = '';
-    temparatureEl.classList.add('temparature');
+  temparature2El.onclick = function changeContent() {  
+    temparatureEl.classList.toggle('none');
+    temparatureEl.classList.toggle('show');
+    temparature2El.classList.toggle('none');
+    temparature2El.classList.toggle('show');
   };
-  temparatureFeelsLikeEl.textContent = `Feels-Like: ${newData.feelsLike.f} ° F`;
+
+  temparatureFeelsLikeEl.textContent = `Feels-Like: ${newData.feelsLike.c} °C`;
   humidityEl.textContent = `Humidity: ${newData.humidity} % `;
   windSpeedEl.textContent = `Wind-Speed: ${newData.wind} MPH`;
 };
@@ -109,4 +112,4 @@ const submitHandler = (e) => {
 
 searchBox.addEventListener('submit', submitHandler);
 searchIcon.addEventListener('click', submitHandler);
-getWeatherData('London');
+getWeatherData('Netrokona');
