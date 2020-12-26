@@ -1,6 +1,10 @@
 # Weather-App
 This project is a weather forecast site, using the weather API. Here a user is able to search for a specific location and toggle displaying the data in Fahrenheit or Celsius.
 
+## Live-Demo
+
+[Check-Weather](https://lamiasristy.github.io/Weather-App-JS/)
+
 ## Screen-shots:
 <img src="assets/images/screenShot.png">
 
