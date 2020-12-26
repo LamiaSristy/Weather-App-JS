@@ -3,31 +3,46 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://kit.fontawesome.com/a538d6fa29.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <title>Weather App</title>
     </head>
-    <body>
+    <body class="background1">
     <header>
       <nav class="navbar navbar-light text-light">
-        <h1 class="title">Hello World!!</h1>
+        <form class="form-inline" id="searchbox">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="input-group-text" id="searchicon">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <input type="text" class="form-control" placeholder="Search by city name" id='location' aria-describedby="basic-addon1">           
+           
+          </div>          
+          <div>
+            <span class="error-txt" id="errortxt">Invalid location!</span>
+          </div>
+        </form>
       </nav>
     </header>
-    <div class="container">        
+    <div class="container w3-animate-zoom">     
+      <img class="weathericon"  src="http://openweathermap.org/img/wn/10n@2x.png" width="50px" height="50px" alt=""> 
+      <p class="weathercondition"></p>
+      <h1 class="location"></h1>     
+      <!-- <p class="temparature"></p> -->
+      <a class="temparature"></a>
+      <a class="temparature2"></a>
+      <p class="feels-like"></p>
+      <p class="humidity"></p>
+      <p class="windspeed"></p>
     </div>
-    <footer  class="displaynone">
-        <div class="flexfooter">
-          <p>
-            <small>Copyright &copy; All rights reserved - by Lamia$risty</small>
-          </p>
-          <ul class="">
-             <li>
-               <i class="fab fa-facebook-square"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram "></i>
-                 <i class="fab fa-tumblr "></i>
-                 <i class="fab fa-linkedin-in "></i>
-             </li>
-          </ul> 
-        </div>                
-      </footer>
+    <footer class="">
+      <div class="flexfooter">
+        <p>
+          <small>Copyright &copy; All rights reserved - by Lamia$risty</small>
+        </p>       
+      </div>                
+    </footer>
     </body>
 </html>
